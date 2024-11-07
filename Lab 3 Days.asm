@@ -22,14 +22,13 @@ LOOP				; Go through the days of the week
 	ADD R0, R0, #10		; Go to the next day of the week 
 	ADD R0, R0, #-1		; Decrement the counter
 	BRp LOOP
-DISPLAY				; Display the day of the week
-	PUTS
+DISPLAY	PUTS			; Display the day of the week
 
 INVALID				; Input is invalid
 
 HALT
 
-PROMPT .STRINGZ "Please enter a number fR0m 0-6: "
+PROMPT .STRINGZ "Please enter a number from 0-6: "
 DAYS .STRINGZ "Sunday   "
  .STRINGZ "Monday   "
  .STRINGZ "Tuesday  "
