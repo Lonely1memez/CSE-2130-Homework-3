@@ -1,32 +1,35 @@
-    .ORIG x3000
-    LD R4, ADDRESS
-    LDR R1, R4, #0	;R1: FIRST NUM
-    LDR R2, R4, #1	;R2: SECOND NUM
-    ADD R3, R1, R2	;R3=R1+R2
-    STR R3, R4, x2
-    AND R3, R1, R2	;R3=R1 AND R2
-    STR R3, R4, x3
-    NOT R5, R1  ;
-    NOT R6, R2
-    AND R3, R5, R6
-    NOT R3, R3
-    STR R3, R4, x4
-    STR R5, R4, x5
-    STR R6, R4, x6
-    ADD R3, R1, #3
-    STR R3, R4, x7
-    ADD R3, R2, #-3
-    STR R3, R4, x8
+.ORIG x3100
 
-    AND R5, R1, #1
-    BRz EVEN
-    AND R3, R3, #0
-    ADD R3, R3, #1
-    STR R3, R4, x9
-    BR NEXT
-EVEN
-    AND R3, R3, #0
-    STR R3, R4, x9
-NEXT	HALT
-    ADDRESS	.FILL x3100
-    .END
+   LD R1,X       ;LOAD X INTO R1
+   LD R2,Y       ;LOAD Y INTO R2
+   ADD R3,R1,R2   ;SUM
+   ST R3,SUM   ;STORE SUM
+   AND R3,R1,R2   ;AND
+   ST R3,AAND   ;STORE AND
+   NOT R3,R1   ;NOT X
+   ST R3,NOTX   ;STORE NOTX
+   NOT R4,R2   ;NOT Y
+   ST R4,NOTY   ;STORE NOTY
+   AND R3,R3,R4   ;X' AND Y'
+   NOT R3,R3   ;(X' AND Y')'=X OR Y
+   ST R3,OOR   ;STORE OR
+   ADD R3,R1,#3   ;X+3
+   ST R3,XPLUS3   ;STORE X+3
+   ADD R3,R2,#-3   ;Y-3
+   ST R3,YMINUS3   ;STORE Y-3
+   AND R3,R1,#0001   ;CHECK EVEN OR ODD
+   ST R3,Z       
+   HALT
+   
+X   .FILL x25
+Y   .FILL x12
+SUM   .FILL #0
+AAND   .FILL #0
+OOR   .FILL #0
+NOTX   .FILL #0
+NOTY   .FILL #0
+XPLUS3   .FILL #0
+YMINUS3   .FILL #0
+Z   .FILL #0
+
+   .END
